@@ -4,15 +4,20 @@ port = {{ mariadb_port }}
 socket = {{ mariadb_socket }}
 
 [mysql]
-auto-rehash                    = 1
-prompt                         = (\\u@\\h) [\\d]>\\_
+auto-rehash = 1
+prompt = (\\u@\\h) [\\d]>\\_
 
 [mysqld]
+default-storage-engine = InnoDB
 port = {{ mariadb_port }}
+extra_port = {{ mariadb_extra_port }}
+extra_max_connections = {{ mariadb_extra_max_connections }}
+
 bind-address = {{ mariadb_bind_address }}
 datadir = {{ mariadb_datadir }}
 socket = {{ mariadb_socket }}
 pid-file = {{ mariadb_pid_file }}
+
 {% if mariadb_skip_name_resolve %}
 skip-name-resolve
 {% endif %}
@@ -56,10 +61,11 @@ thread_cache_size = {{ mariadb_thread_cache_size }}
 query_cache_size = {{ mariadb_query_cache_size }}
 query_cache_limit = {{ mariadb_query_cache_limit }}
 max_connections = {{ mariadb_max_connections }}
+max_user_connections = {{ mariadb_max_user_connections }}
 tmp_table_size = {{ mariadb_tmp_table_size }}
 max_heap_table_size = {{ mariadb_max_heap_table_size }}
 
-# Other settings.
+# Other settings. 
 wait_timeout = {{ mariadb_wait_timeout }}
 lower_case_table_names = {{ mariadb_lower_case_table_names }}
 
@@ -74,6 +80,17 @@ innodb_log_file_size = {{ mariadb_innodb_log_file_size }}
 innodb_log_buffer_size = {{ mariadb_innodb_log_buffer_size }}
 innodb_flush_log_at_trx_commit = {{ mariadb_innodb_flush_log_at_trx_commit }}
 innodb_lock_wait_timeout = {{ mariadb_innodb_lock_wait_timeout }}
+
+# THREAD POOL
+thread_handling = pool-of-threads
+thread_pool_oversubscribe = 10
+thread_pool_stall_limit = 10
+
+#IO 
+innodb_io_capacity = 10000
+innodb_write_io_threads = {{ mariadb_innodb_write_io_threads }}
+innodb_read_io_threads = {{ mariadb_innodb_read_io_threads }}
+
 
 [mysqldump]
 quick

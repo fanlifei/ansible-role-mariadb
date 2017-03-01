@@ -3,6 +3,10 @@
 port = {{ mariadb_port }}
 socket = {{ mariadb_socket }}
 
+[mysql]
+auto-rehash                    = 1
+prompt                         = (\\u@\\h) [\\d]>\\_
+
 [mysqld]
 port = {{ mariadb_port }}
 bind-address = {{ mariadb_bind_address }}

@@ -8,11 +8,15 @@ auto-rehash = 1
 prompt = (\\u@\\h) [\\d]>\\_
 
 [mysqld]
+server-id = {{ mariadb_server_id }}
+gtid_domain-id = {{ mariadb_gtid_domain_id }}
+gtid_strict_mode = 1
+
 default-storage-engine = InnoDB
 port = {{ mariadb_port }}
 extra_port = {{ mariadb_extra_port }}
 extra_max_connections = {{ mariadb_extra_max_connections }}
-
+character-set-server = utf8
 bind-address = {{ mariadb_bind_address }}
 datadir = {{ mariadb_datadir }}
 socket = {{ mariadb_socket }}

@@ -13,13 +13,15 @@ overwrite_global_mycnf: yes
 
 # MariaDB connection settings.
 mariadb_port: "3306"
+mariadb_extra_port: "3307"
+mariadb_extra_max_connections: "5"
 mariadb_bind_address: '0.0.0.0'
 mariadb_skip_name_resolve: no
 mariadb_datadir: /var/lib/mysql
 
 # Slow query log settings.
 mariadb_slow_query_log_enabled: no
-mariadb_slow_query_time: "2"
+mariadb_slow_query_time: "1"
 
 # Memory settings (default values optimized ~512MB RAM).
 mariadb_key_buffer_size: "256M"
@@ -33,6 +35,7 @@ mariadb_thread_cache_size: "8"
 mariadb_query_cache_size: "16M"
 mariadb_query_cache_limit: "1M"
 mariadb_max_connections: "151"
+mariadb_max_user_connections: "100"
 mariadb_tmp_table_size: "16M"
 mariadb_max_heap_table_size: "16M"
 
@@ -53,6 +56,9 @@ mariadb_innodb_lock_wait_timeout: "50"
 # These settings require MySQL > 5.5.
 mariadb_innodb_large_prefix: "1"
 mariadb_innodb_file_format: "barracuda"
+# Io
+mariadb_innodb_write_io_threads: "8"
+mariadb_innodb_read_io_threads: "8"
 
 # mysqldump settings.
 mariadb_mysqldump_max_allowed_packet: "64M"
